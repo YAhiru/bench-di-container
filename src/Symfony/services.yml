@@ -1,0 +1,18 @@
+parameters:
+  # ...
+  db.host: localhost
+  db.port: 3306
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+  DITest\DbConnection:
+    class:     DITest\FakeDBConnection
+    arguments: ['%db.host%', '%db.port%']
+  Psr\SimpleCache\CacheInterface:
+    class:     DITest\FakeCache
+  DITest\Repository:
+    class:     DITest\DbRepository
+    arguments: ['@DITest\DbConnection', '@Psr\SimpleCache\CacheInterface']
