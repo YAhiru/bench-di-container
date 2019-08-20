@@ -10,15 +10,9 @@ use DITest\FakeDBConnection;
 use DITest\Repository;
 use Psr\SimpleCache\CacheInterface;
 use Ray\Di\AbstractModule;
-use Ray\Di\Injector;
 
 final class RayRegister extends AbstractModule
 {
-    public static function init(): Injector
-    {
-        return new Injector(new self);
-    }
-
     protected function configure()
     {
         $this->bind(DbConnection::class)->toConstructor(

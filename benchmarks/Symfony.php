@@ -4,7 +4,7 @@ declare(strict_types=1);
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 use DITest\Repository;
-use DITest\Symfony\SymfonyRegister;
+use DITest\Symfony\SymfonyContainer;
 
 $result = [];
 $baseCnt = 1000;
@@ -12,7 +12,7 @@ $baseCnt = 1000;
 $cnt = $baseCnt;
 $start = microtime(true);
 while ($cnt--) {
-    $container = SymfonyRegister::init();
+    $container = SymfonyContainer::init();
 }
 $result['init'] = (microtime(true) - $start);
 $result['init.average'] = $result['init'] / $baseCnt;

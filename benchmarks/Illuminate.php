@@ -4,7 +4,7 @@ declare(strict_types=1);
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 use DITest\Repository;
-use DITest\Illuminate\IlluminateRegister;
+use DITest\Illuminate\IlluminateContainer;
 
 $result = [];
 $baseCnt = 1000;
@@ -12,7 +12,7 @@ $baseCnt = 1000;
 $cnt = $baseCnt;
 $start = microtime(true);
 while ($cnt--) {
-    $container = IlluminateRegister::init();
+    $container = IlluminateContainer::init();
 }
 $result['init'] = (microtime(true) - $start);
 $result['init.average'] = $result['init'] / $baseCnt;

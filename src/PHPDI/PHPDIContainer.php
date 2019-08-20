@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace DITest\PHPDI;
 
 use DI\Container;
+use DITest\BenchMark\BenchMarkableContainer;
 use DITest\DbConnection;
 use DITest\DbRepository;
 use DITest\FakeCache;
@@ -13,30 +14,27 @@ use Psr\SimpleCache\CacheInterface;
 use function DI\autowire;
 use function DI\create;
 
-final class PHPDIRegister
+final class PHPDIContainer implements BenchMarkableContainer
 {
     /** @var Container */
     private $container;
 
-    public function __construct(Container $container)
+    public function __construct()
     {
-        $this->container = $container;
+        $this->container = new Container;
     }
 
-    public static function init(): Container
-    {
-        $container = new Container();
-        $register = new self($container);
-        $register->register();
-        return $container;
-    }
-
-    public function register(): void
+    public function setUp(): void
     {
         $this->container->set(DbConnection::class, \DI\factory(function () {
             return new FakeDBConnection('localhost', 3306);
         }));
         $this->container->set(CacheInterface::class, create(FakeCache::class));
         $this->container->set(Repository::class, autowire(DbRepository::class));
+    }
+
+    public function get($class)
+    {
+        return $this->container->get($class);
     }
 }
