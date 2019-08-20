@@ -1,5 +1,5 @@
 setup:
-class bindings to container
+bind classes to container
 
 get:
 get instance from container 1000times
