@@ -1,3 +1,9 @@
+setup:
+class bindings to container
+
+get:
+get instance from container 1000times
+
 ```php
 [
   "illuminate" => [
