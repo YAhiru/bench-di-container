@@ -22,7 +22,7 @@ final class BenchMark
 
     public function run(): array
     {
-        $this->bench->start('whole');
+        $this->bench->start('total');
 
         $this->bench->start('setup');
         $this->container->setup();
@@ -35,7 +35,7 @@ final class BenchMark
         }
         $this->bench->stop('get');
 
-        $this->bench->stop('whole');
+        $this->bench->stop('total');
 
         return $this->bench->result();
     }
